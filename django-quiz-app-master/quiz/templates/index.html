@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>This is my index page</h1>
+{% if user.is_authenticated %}
+    <p>Username: {{user.username}}</p>
+    <p>Name: {{user.first_name}} {{user.last_name}}</p>
+    <p>Email: {{user.email}}</p>
+    <div class="row">
+	     <div class="col-sm-8 col-sm-offset-2">
+		       <h1 class="text-center">Instructions</h1>
+		         <ul class="list-group">
+		             <li class="list-group-item">1. blah blah blahh</li>
+		             <li class="list-group-item">2. blah blah blahh</li>
+		             <li class="list-group-item">3. blah blah blahh</li>
+		             <li class="list-group-item">4. blah blah blahh</li>
+		             <li class="list-group-item">5. and blahhhh blahhhh blahhhhhhhhh</li>
+		         </ul>
+	       </div>
+    </div>
+{% endif %}
+
+{% endblock  %}
