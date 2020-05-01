@@ -15,6 +15,5 @@ urlpatterns = [ url(r'^$', view=index, name='index'),
                 url(r'^marking/(?P<pk>[\d.]+)/$',view=QuizMarkingDetail.as_view(),name='quiz_marking_detail'),
                 url(r'^(?P<slug>[\w-]+)/$',view=QuizDetailView.as_view(),name='quiz_start_page'),
                 url(r'^(?P<quiz_name>[\w-]+)/take/$',view=QuizTake.as_view(),name='quiz_question'),
-                path('settings/', view=SettingsView, name='settings'),
-                path('settings/password/',view=password, name='password'),
+                
 ]

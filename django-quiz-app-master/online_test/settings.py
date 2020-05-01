@@ -51,6 +51,7 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'social_django.middleware.SocialAuthExceptionMiddleware',
+
 ]
 
 ROOT_URLCONF = 'online_test.urls'
@@ -76,11 +77,12 @@ TEMPLATES = [
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.facebook.FacebookOAuth2',
-    'social_core.backends.twitter.TwitterOAuth',
     'social_core.backends.github.GithubOAuth2',
-
+    'social_core.backends.google.GoogleOAuth2',
     'django.contrib.auth.backends.ModelBackend',
 )
+
+
 
 WSGI_APPLICATION = 'online_test.wsgi.application'
 
@@ -133,16 +135,19 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-LOGIN_REDIRECT_URL = 'index'
+SOCIAL_AUTH_URL_NAMESPACE = 'social'
 
+LOGIN_REDIRECT_URL = 'index'
+LOGOUT_REDIRECT_URL = 'index'
 
 SOCIAL_AUTH_FACEBOOK_KEY = '233276741073122'
 SOCIAL_AUTH_FACEBOOK_SECRET = '40fc5e2be9e32ea0d3e187fa9fdb11b3'
 
-SOCIAL_AUTH_GITHUB_KEY = '38e0c5a9368f5f80c8f5'
-SOCIAL_AUTH_GITHUB_SECRET = 'bb1cacf1c7bf6f16ffc72304201b1a99a00bd850'
+SOCIAL_AUTH_GITHUB_KEY = 'b293d3692a46534174e6'
+SOCIAL_AUTH_GITHUB_SECRET = '0e0d058ca692f2fa1d2d2aea16430f99d2f57c07'
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = '1002472803132-sv8d96ncl9oo8eeoheba8mn6l7i45aq1.apps.googleusercontent.com'
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'JmuhTbj-TOx_H_eTGu3aH36Q'
 
 
-SOCIAL_AUTH_LOGIN_ERROR_URL = '/settings/'
-SOCIAL_AUTH_LOGIN_REDIRECT_URL = '/settings/'
-SOCIAL_AUTH_RAISE_EXCEPTIONS = False
+LOGIN_URL = '/auth/login/google-oauth2/'
