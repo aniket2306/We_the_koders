@@ -13,10 +13,12 @@ def csv_file_validator(value):
     decoded_file = value.read().decode('utf-8')
     io_string = io.StringIO(decoded_file)
     reader = csv.reader(io_string, delimiter=';', quotechar='|')
-    header_ = next(reader)[0].split(',')
+    header_ = next(reader)[0].split('\t')
     if header_[-1] == '':
         header_.pop()
     required_header = REQUIRED_HEADER
+    #print(header_)
+    #print(REQUIRED_HEADER)
     if required_header != header_:
         raise ValidationError("Invalid File. Please use valid CSV Header and/or Staff Upload Template.")
     return True
