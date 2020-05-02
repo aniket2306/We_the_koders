@@ -2,9 +2,11 @@ from django.conf.urls import url
 from .views import *
 from django.urls import path, include
 from django.contrib.auth import views as auth_views
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 
 
 urlpatterns = [ url(r'^$', view=index, name='index'),
+                url(r'^aboutus/$', view=aboutus_view, name='aboutus'),
                 url(r'^login/$', view=login_user, name='login'),
                 url(r'^logout/$', view=logout_user, name='logout'),
                 url(r'^signup/$', view=signup_user, name='signup'),
@@ -25,3 +27,5 @@ urlpatterns = [ url(r'^$', view=index, name='index'),
                 url(r'^(?P<slug>[\w-]+)/$',view=QuizDetailView.as_view(),name='quiz_start_page'),
 
 ]
+
+urlpatterns += staticfiles_urlpatterns()
