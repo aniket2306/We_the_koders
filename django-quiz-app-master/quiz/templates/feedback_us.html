@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <h3>Feedback Form</h3>
+
+  <form method="post" action="{% url 'feedback_us' %}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" >Submit</button>
+  </form>
+
+
+{% endblock  %}

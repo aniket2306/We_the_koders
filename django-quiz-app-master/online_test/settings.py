@@ -26,7 +26,12 @@ SECRET_KEY = 'q^n4^0*8v2f9%qs$+hg7l0g!-461fja26bzq=cwp)y3u&k6i8&'
 DEBUG = True
 
 ALLOWED_HOSTS = []
-
+EMAIL_HOST = 'smtp.zoho.com'
+EMAIL_HOST_USER = 'we_the_koders@gmail.com'
+EMAIL_HOST_PASSWORD = 'We_the_koders'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 

@@ -6,7 +6,7 @@ from django.shortcuts import get_object_or_404, render
 from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import FormView
-from .forms import QuestionForm
+from .forms import QuestionForm,CommentForm
 from .models import Quiz, Category, Progress, Sitting, Question
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout,get_user_model
@@ -32,6 +32,8 @@ from django.shortcuts import resolve_url
 from django.urls import reverse_lazy
 from django.utils.decorators import method_decorator
 from django.utils.http import (url_has_allowed_host_and_scheme, urlsafe_base64_decode,)
+from django.core.mail import send_mail
+from django.conf import settings
 
 UserModel = get_user_model()
 
@@ -468,3 +470,16 @@ class PasswordResetCompleteView(PasswordContextMixin, TemplateView):
 
 def aboutus_view(request):
     return render(request, 'aboutus.html', {})
+
+def feedback_us(request):
+    if request.method == 'POST':
+        form = CommentForm(request.POST)
+        if form.is_valid():
+            comment = form.save(commit=False)
+            comment.save()
+            return redirect('index')
+    else:
+        form = CommentForm()
+    template_name='feedback_us.html'
+    context = {'form':form}
+    return render(request,template_name,context)

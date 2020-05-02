@@ -553,3 +553,17 @@ def csv_upload_post_save(sender, instance, created, *args, **kwargs):
 
 
 post_save.connect(csv_upload_post_save, sender=CSVUpload)
+
+class comment(models.Model):
+    user = models.CharField(max_length=250)
+    email = models.EmailField()
+    body = models.TextField()
+    created = models.DateTimeField(auto_now_add=True)
+    approved = models.BooleanField(default=False)
+
+    def approved(self):
+        self.approved = True
+        self.save()
+
+    def __str__(self):
+        return self.user
