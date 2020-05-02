@@ -9,7 +9,7 @@ from django.views.generic.edit import FormView
 from .forms import QuestionForm
 from .models import Quiz, Category, Progress, Sitting, Question
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout,get_user_model
 from django.contrib import messages
 from .forms import SignUpForm
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -17,6 +17,8 @@ from django.contrib.auth.forms import AdminPasswordChangeForm, PasswordChangeFor
 from django.contrib.auth import update_session_auth_hash
 from social_django.models import UserSocialAuth
 
+
+UserModel = get_user_model()
 
 class QuizMarkerMixin(object):
     @method_decorator(login_required)
@@ -283,3 +285,5 @@ def signup_user(request):
     else:
         form = SignUpForm()
     return render(request, 'signup.html', {'form': form})
+
+##############################################
