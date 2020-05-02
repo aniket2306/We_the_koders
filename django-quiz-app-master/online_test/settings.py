@@ -153,3 +153,13 @@ SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = 'JmuhTbj-TOx_H_eTGu3aH36Q'
 
 
 LOGIN_URL = '/auth/login/google-oauth2/'
+
+STATIC_URL = '/static/'
+
+STATICFILES_DIRS = (
+ os.path.join(BASE_DIR,'assets'),
+)
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR,'media')
