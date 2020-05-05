@@ -2,9 +2,10 @@
 {% load static %}
 
 {% block content %}
-<h3>User Details</h3>
+
 
 {% if user.is_authenticated %}
+    <h3>User Details</h3>
     <p>Username: {{user.username}}</p>
     <p>Name: {{user.first_name}} {{user.last_name}}</p>
     <p>Email: {{user.email}}</p>
