@@ -182,7 +182,7 @@ class Progress(models.Model):
 
     @property
     def list_all_cat_scores(self):
-
+        
         score_before = self.score
         output = {}
 
@@ -215,7 +215,11 @@ class Progress(models.Model):
         return output
 
     def update_score(self, question, score_to_add=0, possible_to_add=0):
-
+        """
+        Pass in question object, amount to increase score
+        and max possible.
+        Does not return anything.
+        """
         category_test = Category.objects.filter(category=question.category)\
                                         .exists()
 
@@ -259,7 +263,10 @@ class Progress(models.Model):
             self.save()
 
     def show_exams(self):
-
+        """
+        Finds the previous quizzes marked as 'exam papers'.
+        Returns a queryset of complete exams.
+        """
         return Sitting.objects.filter(user=self.user, complete=True)
 
     def __str__(self):
@@ -315,7 +322,18 @@ class SittingManager(models.Manager):
 
 
 class Sitting(models.Model):
-
+    """
+    Used to store the progress of logged in users sitting a quiz.
+    Replaces the session system used by anon users.
+    Question_order is a list of integer pks of all the questions in the
+    quiz, in order.
+    Question_list is a list of integers which represent id's of
+    the unanswered questions in csv format.
+    Incorrect_questions is a list in the same format.
+    Sitting deleted when quiz finished unless quiz.exam_paper is true.
+    User_answers is a json object in which the question PK is stored
+    with the answer the user gave.
+    """
 
     user = models.ForeignKey(settings.AUTH_USER_MODEL, verbose_name=_("User"), on_delete=models.CASCADE)
 
@@ -349,7 +367,11 @@ class Sitting(models.Model):
         permissions = (("view_sittings", _("Can see completed exams.")),)
 
     def get_first_question(self):
-
+        """
+        Returns the next question.
+        If no question is found, returns False
+        Does NOT remove the question from the front of the list.
+        """
         if not self.question_list:
             return False
 
@@ -399,7 +421,10 @@ class Sitting(models.Model):
         self.save()
 
     def add_incorrect_question(self, question):
-
+        """
+        Adds uid of incorrect question to the list.
+        The question object must be passed in.
+        """
         if len(self.incorrect_questions) > 0:
             self.incorrect_questions += ','
         self.incorrect_questions += str(question.id) + ","
@@ -409,7 +434,10 @@ class Sitting(models.Model):
 
     @property
     def get_incorrect_questions(self):
-
+        """
+        Returns a list of non empty integers, representing the pk of
+        questions
+        """
         return [int(q) for q in self.incorrect_questions.split(',') if q]
 
     def remove_incorrect_question(self, question):
@@ -461,20 +489,48 @@ class Sitting(models.Model):
         return len(self._question_ids())
 
     def progress(self):
-
+        """
+        Returns the number of questions answered so far and the total number of
+        questions.
+        """
         answered = len(json.loads(self.user_answers))
         total = self.get_max_score
         return answered, total
 
 
 class Question(models.Model):
+    """
+    Base class for all question types.
+    Shared properties placed here.
+    """
 
+    quiz = models.ManyToManyField(Quiz,
+                                  verbose_name=_("Quiz"),
+                                  blank=True)
 
-    quiz = models.ManyToManyField(Quiz,verbose_name=_("Quiz"),blank=True)
-    category = models.ForeignKey(Category,verbose_name=_("Category"),blank=True,null=True, on_delete=models.CASCADE)
-    figure = models.ImageField(upload_to='uploads/%Y/%m/%d',blank=True,null=True,verbose_name=_("Figure"))
-    content = models.CharField(max_length=1000,blank=False,help_text=_("Enter the question text that you want displayed"),verbose_name=_('Question'))
-    explanation = models.TextField(max_length=2000,blank=True,help_text=_("Explanation to be shown after the question has been answered."),verbose_name=_('Explanation'))
+    category = models.ForeignKey(Category,
+                                 verbose_name=_("Category"),
+                                 blank=True,
+                                 null=True, on_delete=models.CASCADE)
+
+    figure = models.ImageField(upload_to='uploads/%Y/%m/%d',
+                               blank=True,
+                               null=True,
+                               verbose_name=_("Figure"))
+
+    content = models.CharField(max_length=1000,
+                               blank=False,
+                               help_text=_("Enter the question text that "
+                                           "you want displayed"),
+                               verbose_name=_('Question'))
+
+    explanation = models.TextField(max_length=2000,
+                                   blank=True,
+                                   help_text=_("Explanation to be shown "
+                                               "after the question has "
+                                               "been answered."),
+                                   verbose_name=_('Explanation'))
+
     objects = InheritanceManager()
 
     class Meta:
@@ -500,6 +556,8 @@ class CSVUpload(models.Model):
     user        = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     file        = models.FileField(upload_to=upload_csv_file, validators=[csv_file_validator])
     completed   = models.BooleanField(default=False)
+    # questions   = models.BooleanField(default=True)
+    # students    = models.BooleanField(default=False)
 
     def __str__(self):
         return self.user.username
@@ -546,6 +604,10 @@ def csv_upload_post_save(sender, instance, created, *args, **kwargs):
         header_cols = convert_header(header_)
         print(header_cols, str(len(header_cols)))
         parsed_items = []
+
+        '''
+        if using a custom signal
+        '''
         for line in reader:
             # print(line)
             parsed_row_data = {}
@@ -561,7 +623,18 @@ def csv_upload_post_save(sender, instance, created, *args, **kwargs):
             # messages.success(parsed_items)
             print(parsed_items)
         csv_uploaded.send(sender=instance, user=instance.user, csv_file_list=parsed_items)
-
+        '''
+        if using a model directly
+        for line in reader:
+            new_obj = YourModelKlass()
+            i = 0
+            row_item = line[0].split(',')
+            for item in row_item:
+                key = header_cols[i]
+                setattr(new_obj, key) = item
+                i+=1
+            new_obj.save()
+        '''
         instance.completed = True
         instance.save()
 
