@@ -16,38 +16,158 @@
   <!--[if lt IE 9]>
 <script src=""></script>
 <![endif]-->
+<!--Fontawesome CDN-->
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+<!-- JS -->
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 
 </head>
 
-<body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-    <a class="navbar-brand" href="{% url 'index' %}">Quiz App</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
-      aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+<style>
+    .jumbotron{
+        background-color: white;
+    }
+    .form-control{
+        border: 0.125rem solid #4682b4;
+    }
+    .bg-secondary {
+        background-color: #4682b4 !important;
+    }
+    .fontMid{
+        font-size: 18px;
+        font-weight: bold;
+    }
+    .fontLarge{
+        font-size: 25px;
+        font-weight: bold;
+    }
+    .text-primary{
+        color: #ffffff !important;
+    }
+    a.fabb:hover {
+        color: grey;
+    }
+    a.fabb{
+        color: #ffffff;
+    }
+    .extra-padding{
+        padding: 10px 30px;
+    }
+    .foot-link:hover{
+        color:#b3d9f9 !important;
+        text-decoration: none !important;
+    }
+
+    @import url('https://fonts.googleapis.com/css?family=Numans');
+    .card{
+        height: 370px;
+        margin-top: auto;
+        margin-bottom: auto;
+        width: 400px;
+        background-color: #5b9fd8 !important;
+    }
+
+    .social_icon span{
+        font-size: 60px;
+        margin-left: 10px;
+        color: #4682b4;
+    }
+
+    .social_icon span:hover{
+        color: white;
+        cursor: pointer;
+    }
+
+    .card-header h3{
+        color: white;
+    }
+
+    .social_icon{
+        position: absolute;
+        right: 20px;
+        top: -15px;
+    }
+
+    .input-group-prepend span{
+        width: 50px;
+        background-color: #4682b4;
+        color: black;
+        border:0 !important;
+    }
+
+    input:focus{
+        outline: 0 0 0 0  !important;
+        box-shadow: 0 0 0 0 !important;
+
+    }
+
+    .remember{
+        color: white;
+    }
+
+    .remember input
+    {
+        width: 20px;
+        height: 20px;
+        margin-left: 15px;
+        margin-right: 5px;
+    }
+
+    .login_btn{
+        color: white;
+        background-color: #4682b4;
+        width: 100px;
+    }
+
+    .login_btn:hover{
+        color: black;
+        background-color: white;
+    }
+
+    .links{
+        color: white;
+    }
+
+    .links a{
+        margin-left: 4px;
+    }
+</style>
+
+<body style="">
+
+  <nav class="navbar navbar-expand-md navbar-dark bg-secondary text-uppercase fixed-top">
+    <a class="navbar-brand fontLarge" href="{% url 'index' %}">We the Koder</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbarXs">
+        <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="collapsingNavbarXs">
       <ul class="navbar-nav rm-auto">
         {% if user.is_authenticated %}
-        <li class="nav-tem" style="color:gray">
+        <li class="nav-item py-3 px-0 px-lg-3 rounded text-dark" style="color:gray">
           <a href="{% url 'quiz_index' %}" class="nav-link">Quizzes</a>
         </li>
-        <li class="nav-tem" style="color:gray">
+        <li class="nav-item py-3 px-0 px-lg-3 rounded text-dark" style="color:gray">
             <a href="{% url 'quiz_progress' %}" class="nav-link">Progress</a>
           </li>
         {% endif %}
 
       </ul>
       <ul class="navbar-nav ml-auto">
-        <li><a class="nav-link" href="{% url 'aboutus' %}">About Us</a></li>
+        <li><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'aboutus' %}">About Us</a></li>
         <li class="nav-item ">
           {% if user.is_authenticated %}
-          <a class="nav-link" href="{% url 'logout' %}">logout</a>
-          <a class="m-auto" href="{% url 'password_change' %}">Change Password</a>
-          <a class="m-auto" href="{% url 'feedback_us' %}">Feedback</a>
+          <a class="nav-link dropdown-toggle py-3 px-0 px-lg-3 rounded" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accounts</a>
+            <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+                <a class="nav-link py-3 px-4 px-lg-3 rounded text-dark" href="{% url 'feedback_us' %}">Feedback</a>
+                <div class="dropdown-divider"></div>
+                <a class="nav-link py-3 px-4 px-lg-3 rounded text-dark" href="{% url 'password_change' %}">Change Password</a>
+                <div class="dropdown-divider"></div>
+                <a class="nav-link py-3 px-4 px-lg-3 rounded text-dark" href="{% url 'logout' %}">logout</a>
+            </div>
           {% else %}
-          <li><a class="nav-link" href="{% url 'login' %}">Login</a></li>
-          <li><a class="nav-link" href="{% url 'signup' %}">Signup</a></li>
+          <li><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'login' %}">Login</a></li>
           {% endif %}
         </li>
       </ul>
@@ -57,7 +177,7 @@
 
   <!-- Before the quiz content -->
 
-  <div class="container jumbotron">
+  <div class="container jumbotron" style="margin-bottom:0px;">
     {% if messages %} {% for message in messages %}
     <div class="alert alert-warning alert-dismissable" role="alert">
       <button type="button" class="close" data-dismiss="alert" aria-label="Close">
@@ -67,11 +187,30 @@
     </div>
     {% endfor %} {% endif %} {% block content %} {% endblock %}
 
-  </div>
+</div>
+<!-- Footer -->
+<footer class="footer text-center" style="background-color:#4682b4;">
+            <div class="container">
+                <div class="row">
+                    <!-- Footer Location-->
+                    <div class="col-lg-4 mb-5 mb-lg-0">
+                        <h4 class="text-uppercase text-primary"><a class="text-white fontLarge foot-link" href="{% url 'index' %}">We the Koders</a></h4>
+                        <p class="lead mb-0">Enjoy FREE tests from extensive range of categories and move top of the LEADERBOARD.</p>
+                    </div>
 
-  <!-- After the quiz content -->
-
-
+                    <!-- Footer About Text-->
+                    <div class="col-lg-4">
+                        <h4 class="text-uppercase mb-4 text-primary"><a class="text-white fontLarge foot-link" href="{% url 'aboutus' %}">About us</a></h4>
+                        <p class="lead mb-0">To know about our website developer please click the above link!</p>
+                    </div>
+                    <!-- Footer Social Icons-->
+                    <div class="col-lg-4">
+                        <h4 class="text-uppercase mb-4"><a class="text-white fontLarge foot-link" href="{% url 'feedback_us' %}">Feedback</a></h4>
+                        <p class="lead mb-0">Send Us your valueable Feedback !</p>
+                    </div>
+                </div>
+            </div>
+        </footer>
 </body>
 
 </html>

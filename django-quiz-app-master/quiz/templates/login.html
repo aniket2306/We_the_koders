@@ -1,7 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="col-md-6 offset-md-3">
+<!-- <div class="col-md-6 offset-md-3">
     <h1 class="text-center">Login</h1>
     <form method="POST">
         {% csrf_token %}
@@ -12,6 +12,7 @@
             <input type="password" class="form-control" placeholder=" Enter Password" name="password">
         </div>
         <button type="submit" class="btn btn-primary">Login</button>
+
     </form>
     <br>
     <p><strong></strong></p>
@@ -30,6 +31,51 @@
 <div class="d-flex flex-column">
 
   <a class="m-auto" href="{% url 'password_reset' %}">Forget Password</a>
+</div> -->
+
+<div class="container">
+	<div class="d-flex justify-content-center h-100">
+		<div class="card">
+			<div class="card-header">
+				<h3>Sign In</h3>
+				<div class="d-flex justify-content-end social_icon">
+					<span><a class="fabb" href="{% url 'social:begin' 'facebook' %}"><i class="fab fa-facebook-square"></i></a></span>
+					<span><a class="fabb" href="{% url 'social:begin' 'google-oauth2' %}"><i class="fab fa-google-plus-square"></i></a></span>
+					<span><a class="fabb" href="{% url 'social:begin' 'github' %}"><i class="fab fa-github-square"></i></a></span>
+				</div>
+			</div>
+			<div class="card-body">
+				<form method="post">
+                    {% csrf_token %}
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" class="form-control" placeholder="username" name = "username">
+
+					</div>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input type="password" class="form-control" placeholder="password" name="password">
+					</div>
+					<div class="form-group">
+						<input type="submit" value="Login" class="btn float-right login_btn">
+					</div>
+				</form>
+			</div>
+			<div class="card-footer">
+				<div class="d-flex justify-content-center links">
+					Don't have an account?<a class="fabb" href="{% url 'signup' %}">Sign Up</a>
+				</div>
+				<div class="d-flex justify-content-center">
+					<a class="fabb" href="{% url 'password_reset' %}">Forgot your password?</a>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
+
 
 {% endblock %}
