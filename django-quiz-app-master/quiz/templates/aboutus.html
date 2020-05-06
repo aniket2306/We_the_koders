@@ -2,77 +2,66 @@
 {% load static %}
 
 {% block content %}
+<div class=" align-items-center">
+     <div class="align-items-center">
+         <div class="bg-light " style="border:2px solid #0082ef9c">
+             <h1 class="text-center py-5">About US</h1>
+             <div class="container py-5">
 
+                 <div class="row text-center">
+                   <!-- Team item-->
+                   <div class="col-xl-3 col-sm-6 mb-5">
+                     <div class="bg-white rounded shadow-sm px-4"><img src="{% static 'aniketp.jfif' %}" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                       <h5 class="mb-0">Aniket Prakash</h5><span class="small text-uppercase text-muted">CEO - Founder</span>
+                       <div>
+                         <a class="btn  btn-social mx-1" href="https://www.facebook.com/aniket.prahash"><i class="fab fa-facebook"></i></a>
+                         <a class="btn  btn-social mx-1" href="https://www.instagram.com/aniket_prakash_/"><i class="fab fa-instagram"></i></a>
+                       </div>
 
-{% if user.is_authenticated %}
-    <h3>User Details</h3>
-    <p>Username: {{user.username}}</p>
-    <p>Name: {{user.first_name}} {{user.last_name}}</p>
-    <p>Email: {{user.email}}</p>
-    <div class=" align-items-center">
-	     <div class="align-items-center">
-		       <h1 class="text-center">About US</h1>
-{% endif %}
+                     </div>
+                   </div>
+           <!-- End-->
 
+           <!-- Team item-->
+                   <div class="col-xl-3 col-sm-6 mb-5">
+                     <div class="bg-white rounded shadow-sm px-4"><img src="{% static 'akash.jpg' %}" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                       <h5 class="mb-0">Akash Gupta</h5><span class="small text-uppercase text-muted">Art Director</span>
+                       <div>
+                         <a class="btn  btn-social mx-1" href="https://www.facebook.com/profile.php?id=100002491055067"><i class="fab fa-facebook"></i></a>
+                         <a class="btn  btn-social mx-1" href="https://www.instagram.com/aka.sh_gupta/"><i class="fab fa-instagram"></i></a>
+                       </div>
+                     </div>
+                   </div>
+           <!-- End-->
 
-<div class="bg-light py-5">
-  <div class="container py-5">
-    <div class="row mb-4">
-    </div>
+           <!-- Team item-->
+                   <div class="col-xl-3 col-sm-6 mb-5">
+                     <div class="bg-white rounded shadow-sm px-4"><img src="{% static 'aman.jfif' %}" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                       <h5 class="mb-0">Aman Jain</h5><span class="small text-uppercase text-muted">Web Designer</span>
+                       <div>
+                         <a class="btn  btn-social mx-1" href="https://www.facebook.com/aman.jain.144181"><i class="fab fa-facebook"></i></a>
+                         <a class="btn  btn-social mx-1" href="https://www.instagram.com/im_aaman/"><i class="fab fa-instagram"></i></a>
+                       </div>
+                     </div>
+                   </div>
+           <!-- End-->
 
-    <div class="row text-center">
-      <!-- Team item-->
-      <div class="col-xl-3 col-sm-6 mb-5">
-        <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{% static 'aniketp.jfif' %}" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
-          <h5 class="mb-0">Aniket Prakash</h5><span class="small text-uppercase text-muted">CEO - Founder</span>
-        </div>
-      </div>
-      <!-- End-->
+           <!-- Team item-->
+                   <div class="col-xl-3 col-sm-6 mb-5">
+                     <div class="bg-white rounded shadow-sm px-4"><img src="{% static 'anikets.jpg' %}" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
+                       <h5 class="mb-0">Aniket Sinha</h5><span class="small text-uppercase text-muted">Designer</span>
+                       <div>
+                         <a class="btn  btn-social mx-1" href="https://www.facebook.com/amaniketsinha"><i class="fab fa-facebook"></i></a>
+                         <a class="btn  btn-social mx-1" href="https://www.instagram.com/whoaniketsinha/"><i class="fab fa-instagram"></i></a>
+                       </div>
+                     </div>
+                   </div>
+           <!-- End-->
 
-      <!-- Team item-->
-      <div class="col-xl-3 col-sm-6 mb-5">
-        <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{% static 'akash.jpg' %}" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
-          <h5 class="mb-0">Akash Gupta</h5><span class="small text-uppercase text-muted">Art Director</span>
-        </div>
-      </div>
-      <!-- End-->
+                </div>
+            </div>
+         </div>
 
-      <!-- Team item-->
-      <div class="col-xl-3 col-sm-6 mb-5">
-        <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{% static 'aman.jfif' %}" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
-          <h5 class="mb-0">Aman Jain</h5><span class="small text-uppercase text-muted">Web Designer</span>
-        </div>
-      </div>
-      <!-- End-->
-
-      <!-- Team item-->
-      <div class="col-xl-3 col-sm-6 mb-5">
-        <div class="bg-white rounded shadow-sm py-5 px-4"><img src="{% static 'anikets.jpg' %}" alt="" width="100" class="img-fluid rounded-circle mb-3 img-thumbnail shadow-sm">
-          <h5 class="mb-0">Aniket Sinha</h5><span class="small text-uppercase text-muted">Designer</span>
-        </div>
-      </div>
-      <!-- End-->
-
-    </div>
-  </div>
+     </div>
 </div>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-	       </div>
-    </div>
-
 {% endblock  %}

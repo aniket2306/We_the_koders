@@ -1,21 +1,71 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>Sign up</h2>
-  <form method="post">
-    {% csrf_token %}
-    {% for field in form %}
-      <p>
-        {{ field.label_tag }}<br>
-        {{ field }}
-        {% if field.help_text %}
-          <small style="color: grey">{{ field.help_text }}</small>
-        {% endif %}
-        {% for error in field.errors %}
-          <p style="color: red">{{ error }}</p>
-        {% endfor %}
-      </p>
-    {% endfor %}
-    <button type="submit">Sign up</button>
-  </form>
+  <!-- Material form register -->
+<div class="container rounded" style="max-width:600px;text-align:-webkit-center;background-color:#58a6e6;">
+
+    <h5 class="card-header info-color text-white text-center py-4">
+        Sign Up
+    </h5>
+
+    <!--Card content-->
+    <div class="card-body px-lg-5 pt-0">
+
+        <!-- Form -->
+        <form class="text-center" style="color: #757575;" method="post">
+            {% csrf_token %}
+            <!-- Username -->
+            <div class="md-form mt-0 extra-padding">
+                <input type="text" id="materialRegisterFormUsername" class="form-control" name="username" placeholder="Username" required>
+            </div>
+
+            <div class="form-row extra-padding">
+                <div class="col ">
+                    <!-- First name -->
+                    <div class="md-form">
+                        <input type="text" id="materialRegisterFormFirstName" class="form-control" name="first_name" placeholder="First Name">
+                    </div>
+                </div>
+                <div class="col">
+                    <!-- Last name -->
+                    <div class="md-form">
+                        <input type="text" id="materialRegisterFormLastName" class="form-control" name="last_name" placeholder="Last Name">
+                    </div>
+                </div>
+            </div>
+
+            <!-- E-mail -->
+            <div class="md-form mt-0 extra-padding">
+                <input type="email" id="materialRegisterFormEmail" class="form-control" name="email" placeholder="E-mail" required>
+            </div>
+
+            <!-- Password -->
+            <div class="md-form extra-padding">
+                <input type="password" id="materialRegisterFormPassword" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock" name="password1" placeholder="Password" required>
+                <small id="materialRegisterFormPasswordHelpBlock" class="form-text text-light mb-4">
+                    At least 8 characters and 1 digit
+                </small>
+            </div>
+            <div class="md-form extra-padding">
+                <input type="password" id="materialRegisterFormPassword" class="form-control" aria-describedby="materialRegisterFormPasswordHelpBlock" name="password2" placeholder="Confirm Password" required>
+            </div>
+
+            <!-- Sign up button -->
+            <button class="btn btn-rounded btn-block my-4 text-white" type="submit"
+            style="border-color:white;"><b>Sign Up</b></button>
+
+            <hr>
+
+            <!-- Terms of service -->
+            <p>By clicking
+                <em>Sign up</em> you agree to our
+                <a class="fabb" href="" target="_blank">terms of service</a>
+
+        </form>
+        <!-- Form -->
+
+    </div>
+
+</div>
+<!-- Material form register -->
 {% endblock %}

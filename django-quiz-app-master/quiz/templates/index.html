@@ -1,23 +1,133 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Homepage</h1>
 {% if user.is_authenticated %}
-    <p>Username: {{user.username}}</p>
-    <p>Name: {{user.first_name}} {{user.last_name}}</p>
-    <p>Email: {{user.email}}</p>
-    <div class="row">
-	     <div class="col-sm-8 col-sm-offset-2">
-		       <h1 class="text-center">Instructions</h1>
-		         <ul class="list-group">
-		             <li class="list-group-item">1. blah blah blahh</li>
-		             <li class="list-group-item">2. blah blah blahh</li>
-		             <li class="list-group-item">3. blah blah blahh</li>
-		             <li class="list-group-item">4. blah blah blahh</li>
-		             <li class="list-group-item">5. and blahhhh blahhhh blahhhhhhhhh</li>
-		         </ul>
-	       </div>
+
+<div class="container bootstrap snippet">
+    <div class="panel-body inf-content">
+        <div class="row">
+            <div class="col-md-4">
+                <img alt="" style="width:600px;" title="" class="img-circle img-thumbnail isTooltip" src="https://bootdey.com/img/Content/user-453533-fdadfd.png" data-original-title="Usuario">
+                <ul title="Ratings" class="list-inline ratings text-center">
+                    <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                    <li><a href="#"><span class="glyphicon glyphicon-star"></span></a></li>
+                </ul>
+            </div>
+            <div class="col-md-6">
+                <strong class="fontMid" style="margin-left:100px;">Information</strong><br>
+                <div class="table-responsive">
+                <table class="table table-condensed table-responsive table-user-information">
+                    <tbody>
+
+                        <tr>
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-user  text-primary"></span>
+                                    Name
+                                </strong>
+                            </td>
+                            <td class="text-primary bg-secondary">
+                                {{user.first_name}} {{user.last_name}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-bookmark text-primary"></span>
+                                    Username
+                                </strong>
+                            </td>
+                            <td class="text-primary bg-secondary">
+                                {{user.username}}
+                            </td>
+                        </tr>
+
+
+                        <tr>
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-eye-open text-primary"></span>
+                                    Role
+                                </strong>
+                            </td>
+                            <td class="text-primary bg-secondary">
+                                {% if user.is_superuser %}
+                                    Admin
+                                {% else %}
+                                    User
+                                {% endif %}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-envelope text-primary"></span>
+                                    Email
+                                </strong>
+                            </td>
+                            <td class="text-primary bg-secondary">
+                                {{user.email}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-asterisk text-primary"></span>
+                                    Joined Date
+                                </strong>
+                            </td>
+                            <td class="text-primary bg-secondary">
+                                {{user.date_joined}}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <strong>
+                                    <span class="glyphicon glyphicon-calendar text-primary"></span>
+                                    Last Login
+                                </strong>
+                            </td>
+                            <td class="text-primary bg-secondary">
+                                 {{user.last_login}}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+<div class="jumbotron col-sm-offset-2 bg-secondary" style="padding-top:20px;padding-bottom:40px;">
+      <h2 class="text-center text-primary" style="padding-bottom:10px;">INSTRUCTIONS</h2>
+        <ul class="list-group">
+            <li class="list-group-item"><b>1.</b>  Please follow the below given instructions for smooth experience of the website.</li>
+            <li class="list-group-item"><b>2.</b>  If you have not logged in yet then please login and then continue.</li>
+            <li class="list-group-item"><b>3.</b>  After you login you can see your details in the Homepage. You can click on the Quizzes link in the Navigation bar
+                                        to give available quizes.</li>
+            <li class="list-group-item"><b>4.</b>  You can find different categories of quizes for example: Math, Physics, Cpp etc. Choose according to your interest and
+                                        appear for the quiz. You will be given further instructions whereever necessary in the page.</li>
+            <li class="list-group-item"><b>5.</b>  Make sure to give feedback when you find any bug or glich in the website, we will reach you as soon as possible.</li>
+            <li class="list-group-item"><b>6.</b>  While leaving please check if you have logged out of the page.</li>
+        </ul>
+  </div>
+{% else %}
+<div class="jumbotron col-sm-offset-2 bg-secondary" style="padding-top:20px;padding-bottom:40px;">
+      <h2 class="text-center text-primary" style="padding-bottom:10px;">INSTRUCTIONS</h2>
+        <ul class="list-group">
+            <li class="list-group-item"><b>1.</b>  Please follow the below given instructions for smooth experience of the website.</li>
+            <li class="list-group-item"><b>2.</b>  If you have not logged in yet then please login and then continue.</li>
+            <li class="list-group-item"><b>3.</b>  After you login you can see your details in the Homepage. You can click on the Quizzes link in the Navigation bar
+                                        to give available quizes.</li>
+            <li class="list-group-item"><b>4.</b>  You can find different categories of quizes for example: Math, Physics, Cpp etc. Choose according to your interest and
+                                        appear for the quiz. You will be given further instructions whereever necessary in the page.</li>
+            <li class="list-group-item"><b>5.</b>  Make sure to give feedback when you find any bug or glich in the website, we will reach you as soon as possible.</li>
+            <li class="list-group-item"><b>6.</b>  While leaving please check if you have logged out of the page.</li>
+        </ul>
+  </div>
 {% endif %}
 
 {% endblock  %}
