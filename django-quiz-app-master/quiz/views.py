@@ -264,9 +264,11 @@ class QuizTake(FormView):
 
 
 def index(request):
-    n= Notification.objects.filter(user=request.user, viewed=False)
-    return render(request, 'index.html', {'notifications':n})
-
+    if request.user.is_authenticated:
+        n= Notification.objects.filter(user=request.user, viewed=False)
+        return render(request, 'index.html', {'notifications':n})
+    else:
+        return render(request,'index.html',{})
 
 def login_user(request):
 
