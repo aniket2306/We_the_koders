@@ -23,7 +23,7 @@
     <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="{% static 'newstyle.css' %}" integrity=""crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'newstyle.css' %}" integrity=""crossorigin="anonymous">
     <script type="text/javascript">
     (function(){
         'use strict';
@@ -81,26 +81,43 @@
 
 <body style="">
 
-  <nav class="navbar navbar-expand-md navbar-dark bg-secondary text-uppercase fixed-top">
-    <a class="navbar-brand fontLarge" href="{% url 'index' %}">We the Koder</a>
+  <nav class="navbar navbar-expand-md navbar-dark bg-secondary fixed-top">
+    <a class="navbar-brand fontLarge text-uppercase" href="{% url 'index' %}">We the Koder</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsingNavbarXs">
         <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="collapsingNavbarXs">
       <ul class="navbar-nav rm-auto">
         {% if user.is_authenticated %}
-        <li class="nav-item py-3 px-0 px-lg-3 rounded text-dark" style="color:gray">
+        <li class="nav-item py-3 px-0 px-lg-3 rounded text-dark text-uppercase" style="color:gray">
           <a href="{% url 'quiz_index' %}" class="nav-link">Quizzes</a>
         </li>
-        <li class="nav-item py-3 px-0 px-lg-3 rounded text-dark" style="color:gray">
+        <li class="nav-item py-3 px-0 px-lg-3 rounded text-dark text-uppercase" style="color:gray">
             <a href="{% url 'quiz_progress' %}" class="nav-link">Progress</a>
           </li>
         {% endif %}
 
       </ul>
       <ul class="navbar-nav ml-auto">
-        <li><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'aboutus' %}">About Us</a></li>
-        <li class="nav-item ">
+        <li><a class="nav-link py-3 px-0 px-lg-3 rounded text-uppercase" href="{% url 'aboutus' %}">About Us</a></li>
+        {% if notifications.count > 0 %}
+        <a class="nav-link dropdown-toggle py-3 px-0 px-lg-3 rounded notification text-uppercase" id="userDropdown1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span>Notification</span> 
+          <span class="badge"></span>
+        </a>
+            <div class="dropdown-menu dropdown-menu-right px-4 notif-dropdown" aria-labelledby="userDropdown1">
+                  {% for n in notifications %}
+                    <p><a class="nav-link px-4 px-lg-3 text-dark" href="/notification/show/{{n.id}}" style="padding-bottom: 0;">
+                      {{n.title}}</a>
+                    </p>
+                    <small class="notif-small">Date: 12 May 2020</small>
+                    <br>
+                    <div class="dropdown-divider"></div>
+                  {% endfor %}
+              
+            </div>
+            {% endif %}
+        <li class="nav-item text-uppercase">
           {% if user.is_authenticated %}
           <a class="nav-link dropdown-toggle py-3 px-0 px-lg-3 rounded" id="userDropdown" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Accounts</a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
@@ -111,7 +128,7 @@
                 <a class="nav-link py-3 px-4 px-lg-3 rounded text-dark" href="{% url 'logout' %}">logout</a>
             </div>
           {% else %}
-          <li><a class="nav-link py-3 px-0 px-lg-3 rounded" href="{% url 'login' %}">Login</a></li>
+          <li><a class="nav-link py-3 px-0 px-lg-3 rounded text-uppercase" href="{% url 'login' %}">Login</a></li>
           {% endif %}
         </li>
       </ul>
