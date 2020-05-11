@@ -7,7 +7,7 @@ from django.utils.decorators import method_decorator
 from django.views.generic import DetailView, ListView, TemplateView
 from django.views.generic.edit import FormView
 from .forms import QuestionForm,CommentForm
-from .models import Quiz, Category, Progress, Sitting, Question
+from .models import *
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login, logout,get_user_model
 from django.contrib import messages
@@ -258,11 +258,14 @@ class QuizTake(FormView):
 
         return render(self.request, 'result.html', results)
 
+#class leaderboard_views(ListView):
+
 
 
 
 def index(request):
-    return render(request, 'index.html', {})
+    n= Notification.objects.filter(user=request.user, viewed=False)
+    return render(request, 'index.html', {'notifications':n})
 
 
 def login_user(request):
@@ -484,3 +487,14 @@ def feedback_us(request):
     template_name='feedback_us.html'
     context = {'form':form}
     return render(request,template_name,context)
+
+def show_notification(request,notification_id):
+    n = Notification.objects.get(id=notification_id)
+    return render(request,'notification.html',{'notification':n})
+
+def delete_notification(request,notification_id):
+    n = Notification.objects.get(id=notification_id)
+    n.viewed= True
+    n.save()
+
+    return redirect('index')

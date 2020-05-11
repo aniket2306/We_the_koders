@@ -14,6 +14,7 @@ from .signals import csv_uploaded
 from .validators import csv_file_validator
 from django.contrib.auth.models import User
 from django.contrib import messages
+from django.dispatch import receiver
 
 
 class CategoryManager(models.Manager):
@@ -182,7 +183,7 @@ class Progress(models.Model):
 
     @property
     def list_all_cat_scores(self):
-        
+
         score_before = self.score
         output = {}
 
@@ -575,6 +576,18 @@ class comment(models.Model):
 
     def __str__(self):
         return self.user
+
+class Notification(models.Model):
+    title = models.CharField(max_length=256)
+    message = models.TextField()
+    viewed = models.BooleanField(default=False)
+    user = models.ForeignKey(User,on_delete=models.CASCADE)
+
+@receiver(post_save, sender=User)
+def create_welcome_message(sender, **kwargs):
+    if kwargs.get('created',False):
+        Notification.objects.create(user=kwargs.get('instance'),title="Welcome to We are the Koders!",message="Thanks for signing in!")
+
 
 def create_user(data):
     user =  User.objects.create_user(username=data['username'],
