@@ -101,6 +101,16 @@
         </div>
     </div>
 </div>
+{% if notifications.count > 0 %}
+  <div class="jumbotron col-sm-offset-2 bg-secondary" style="padding-top:20px;padding-bottom:40px;">
+
+    <h2 class="text-center text-primary" style="padding-bottom:10px;">NOTIFICATIONS</h2>
+    {% for n in notifications %}
+      <p><a href="/notification/show/{{n.id}}">{{n.title}}></a></p>
+    {% endfor %}
+  </div>
+{% endif %}
+
 <div class="jumbotron col-sm-offset-2 bg-secondary" style="padding-top:20px;padding-bottom:40px;">
       <h2 class="text-center text-primary" style="padding-bottom:10px;">INSTRUCTIONS</h2>
         <ul class="list-group">
