@@ -9,77 +9,73 @@
 {% block content %}
 
   {% if cat_scores %}
+  <div class="col-md-12 col-lg-12">
+          <div class="panel panel-primary">
+              <div class="panel-heading">
+                  <h3 class="panel-title m-5 text-center bg-secondary text-white py-1">Your Progress Till Now!!</h3>
 
-  <h1>{% trans "Question Category Scores" %}</h1>
+              </div>
+              <div class="">
+                  <input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter by Name" />
+              </div>
+              <table class="table" id="dev-table" style="">
+                  <thead class="bg-secondary text-white">
+                      <tr>
+                          <th>{% trans "Category" %}</th>
+                          <th>{% trans "Correctly Answererd" %}</th>
+                          <th>{% trans "Total Questions" %}</th>
+                          <th>% Correct</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for cat, value in cat_scores.items %}
+                	  <tr>
+                		<td>{{ cat }}</td>
+                		<td>{{ value.0 }}</td>
+                		<td>{{ value.1 }}</td>
+                		<td>{{ value.2 }}</td>
+                	  </tr>
 
-  <table class="table table-bordered table-striped">
-
-	<thead>
-	  <tr>
-		<th>{% trans "Category" %}</th>
-		<th>{% trans "Correctly answererd" %}</th>
-		<th>{% trans "Total" %}</th>
-		<th>%</th>
-	  </tr>
-	</thead>
-
-	<tbody>
-
-
-	  {% for cat, value in cat_scores.items %}
-	  <tr>
-		<td>{{ cat }}</td>
-		<td>{{ value.0 }}</td>
-		<td>{{ value.1 }}</td>
-		<td>{{ value.2 }}</td>
-	  </tr>
-
-	  {% endfor %}
-
-	</tbody>
-
-  </table>
-
+                	  {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div>
 
   {% endif %}
 
   {% if exams %}
 
   <hr>
+  <div class="col-md-12 col-lg-12">
+          <div class="panel panel-primary">
+              <div class="panel-heading">
+                  <h3 class="panel-title m-5 text-center bg-secondary text-white py-1">Previous Appeared Test!!</h3>
+              </div>
+              <table class="table" id="dev-table2" style="">
+                  <thead class="bg-secondary text-white">
+                      <tr>
+                            <th>{% trans "Quiz Title" %}</th>
+                      		<th>{% trans "Score" %}</th>
+                      		<th>{% trans "Possible Score" %}</th>
+                      		<th>% Correct</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      {% for exam in exams %}
 
-  <h1>{% trans "Previous exam papers" %}</h1>
-  <p class="lead">
-	{% trans "Below are the results of exams that you have sat." %}
-  </p>
+                	  <tr>
+                		<td>{{ exam.quiz.title }}</td>
+                		<td>{{ exam.current_score }}</td>
+                		<td>{{ exam.get_max_score }}</td>
+                		<td>{{ exam.get_percent_correct }}</td>
+                	  </tr>
 
-  <table class="table table-bordered table-striped">
-
-	<thead>
-	  <tr>
-		<th>{% trans "Quiz Title" %}</th>
-		<th>{% trans "Score" %}</th>
-		<th>{% trans "Possible Score" %}</th>
-		<th>%</th>
-	  </tr>
-	</thead>
-
-	<tbody>
-
-	  {% for exam in exams %}
-
-	  <tr>
-		<td>{{ exam.quiz.title }}</td>
-		<td>{{ exam.current_score }}</td>
-		<td>{{ exam.get_max_score }}</td>
-		<td>{{ exam.get_percent_correct }}</td>
-	  </tr>
-
-	  {% endfor %}
-
-	</tbody>
-
-  </table>
-
+                	  {% endfor %}
+                  </tbody>
+              </table>
+          </div>
+      </div>
   {% endif %}
 
 
