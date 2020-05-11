@@ -105,3 +105,25 @@ input:focus{
 .links a{
     margin-left: 4px;
 }
+
+/* Notification Dropdown */
+.notif-dropdown{
+    min-width: 500px !important;
+    max-height: 500px !important;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.notification .badge {
+    position: sticky;
+    padding: 5px 10px;
+    border-radius: 50%;
+    background: #23a701;
+    color: white;
+  }
+ .notif-p{
+     font-size: 0.8rem;
+     margin-bottom: 0px;
+ } 
+ .notif-small{
+     float: right;
+ }
