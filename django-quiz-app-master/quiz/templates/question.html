@@ -10,7 +10,7 @@
 
 {% if previous.answers %}
 
-  <p class="muted"><small>{% trans "The previous question" %}:</small></p>
+  <p class="muted">{% trans "Result of the Previous Question: " %}:</p>
   <p>{{ previous.previous_question }}</p>
 
   {% if previous.previous_outcome %}
@@ -21,7 +21,7 @@
   	  <p><small>
 		{% trans "Your answer was" %} </small>
 		<strong>
-		  {{ previous.previous_outcome|yesno:"correct,incorrect" }}
+		  {{ previous.previous_outcome|yesno:" Correct, Incorrect" }}
 		</strong>
 	  </p>
 
@@ -48,10 +48,7 @@
 </div>
 {% endif %}
 
-<p>
-  <small class="muted">{% trans "Question category" %}:</small>
-  <strong>{{ question.category }}</strong>
-</p>
+  <p class="">{% trans "Question category" %}: <strong>{{ question.category }}</strong></p>
 
 <p class="lead">{{ question.content }}</p>
 
@@ -59,7 +56,8 @@
     <img src="{{ question.figure.url }}" alt="{{ question.content }}" />
 {% endif %}
 
-<form action="" method="POST">{% csrf_token %}
+<form action="" method="POST">
+{% csrf_token %}
   <input type=hidden name="question_id" value="{{ question.id }}">
 
   <ul class="list-group">

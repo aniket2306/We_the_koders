@@ -1,6 +1,20 @@
 {% extends "base.html" %}
 {% block content %}
-  <h2>{{notification.title}}</h2>
-  <p>{{notification.message}}</p>
-  <p><a href="/notification/delete/{{notification.id}}/">Mark as Read</a></p>
+<table class="table col-md-6 lg-md-6" style="margin:auto;">
+    <tr class="col" >
+        <td style="text-align: -webkit-center">
+            <p><strong>{{notification.title}}</strong></p>
+            <p class="notif-p" style="text-align:end;"><small style="">{{notification.adding_date}}</small></p>
+
+        </td>
+    </tr>
+    <tr class="col">
+        <td><p>{{notification.message}}</p></td>
+    </tr>
+    <tr class="col">
+        <td style="text-align: -webkit-center">
+            <a class="text-dark" href="/notification/delete/{{notification.id}}/" style>Mark as Read</a>
+        </td>
+    </tr>
+</table>
 {% endblock %}

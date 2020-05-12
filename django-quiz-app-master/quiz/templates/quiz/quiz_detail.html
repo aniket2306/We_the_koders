@@ -5,15 +5,37 @@
 {% endblock %}
 
 {% block content %}
-<h2>{{ quiz.title }}</h2>
-<h3>{% trans "Category" %}: {{ quiz.category }}</h3>
-{% if quiz.single_attempt %}
-  <h4>{% trans "You will only get one attempt at this quiz" %}.</h4>
-{% endif %}
-<p>{{ quiz.description }}</p>
-<p>
-  <a href="{% url 'quiz_question' quiz_name=quiz.url %}">
-	{% trans "Start quiz" %}
-  </a>
-</p>
+<div class="container py-5">
+    <table class="table col-md-6 lg-md-6" style="margin:auto;">
+        <tr class="col">
+            <th class="bg-secondary text-white">Title</th>
+            <td>{{ quiz.title }}</td>
+        </tr>
+        <tr class="col">
+            <th class="bg-secondary text-white">Category</th>
+            <td>{{ quiz.category }}</td>
+        </tr>
+        <tr class="col">
+            <th class="bg-secondary text-white">Details</th>
+            <td>{{ quiz.description }}</td>
+        </tr class="col">
+        {% if quiz.single_attempt %}
+        <tr>
+            <th class="bg-secondary text-white">Attempt</th>
+            <td>You will only get one attempt at this quiz!</td>
+        </tr class="col">
+        {% endif %}
+        <tr class="col">
+            <th class="bg-secondary text-white">Click to Start</th>
+            <td>
+                <a class="btn bg-secondary text-white" href="{% url 'quiz_question' quiz_name=quiz.url %}">
+                {% trans "Start quiz" %}
+                </a>
+            </td>
+
+        </tr>
+    </table>
+</div>
+
+
 {% endblock %}

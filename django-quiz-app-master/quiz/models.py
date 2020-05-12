@@ -581,6 +581,7 @@ class Notification(models.Model):
     title = models.CharField(max_length=256)
     message = models.TextField()
     viewed = models.BooleanField(default=False)
+    adding_date = models.DateTimeField(auto_now_add=True)
     user = models.ForeignKey(User,on_delete=models.CASCADE)
 
 @receiver(post_save, sender=User)

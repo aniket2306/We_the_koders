@@ -39,9 +39,13 @@
 	</p>
 
 	{% if quiz.pass_mark %}
-	 <hr><p class="lead">{{ sitting.result_message }}</p><hr>
-  {% endif %}
+	<hr>
+        <p class="lead">{{ sitting.result_message }}</p>
+	<hr>
 
+	{% endif %}
+
+	<p>{% trans "Review the questions below and try the exam again in the future"%}.</p>
 
 	{% if user.is_authenticated %}
 
@@ -79,11 +83,6 @@
       {% if question.user_answer %}
       <p>{% trans "Your answer" %}: {{ question|answer_choice_to_string:question.user_answer }}</p>
       {% endif %}
-      <p>Your answer was
-    	<strong>
-    	  {{ previous.previous_outcome|yesno:"correct,incorrect" }}
-    	</strong>
-      </p>
 
 	  <p><strong>{% trans "Explanation" %}:</strong></p>
 	  <div class="well " style="background-color: #fcf8e3;">

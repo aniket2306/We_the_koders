@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% load i18n %}
+{% block title %}{% trans "Leaderboard" %}{% endblock %}
+
+{% block content %}
+<h2>{% trans "leaderboard" %}</h2>
+
+<ul>
+  {% for list in progress_list %}
+  <li>
+	{{ list }}
+  </li>
+  {% endfor %}
+</ul>
+
+{% endblock %}

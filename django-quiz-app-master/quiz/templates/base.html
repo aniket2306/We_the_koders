@@ -102,7 +102,7 @@
         <li><a class="nav-link py-3 px-0 px-lg-3 rounded text-uppercase" href="{% url 'aboutus' %}">About Us</a></li>
         {% if notifications.count > 0 %}
         <a class="nav-link dropdown-toggle py-3 px-0 px-lg-3 rounded notification text-uppercase" id="userDropdown1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span>Notification</span> 
+          <span>Notification</span>
           <span class="badge"></span>
         </a>
             <div class="dropdown-menu dropdown-menu-right px-4 notif-dropdown" aria-labelledby="userDropdown1">
@@ -110,11 +110,11 @@
                     <p><a class="nav-link px-4 px-lg-3 text-dark" href="/notification/show/{{n.id}}" style="padding-bottom: 0;">
                       {{n.title}}</a>
                     </p>
-                    <small class="notif-small">Date: 12 May 2020</small>
+                    <small class="notif-small">{{n.adding_date}}</small>
                     <br>
                     <div class="dropdown-divider"></div>
                   {% endfor %}
-              
+
             </div>
             {% endif %}
         <li class="nav-item text-uppercase">
