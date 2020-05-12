@@ -1,43 +1,52 @@
 {% extends 'base.html' %}
 {% load i18n %}
 {% load quiz_tags %}
-{% block title %}{% trans "All Quizzes" %}{% endblock %}
+{% block title %}{% trans "Quizzes" %}{% endblock %}
 
 {% block content %}
-<h2>{% trans "List of quizzes" %}</h2>
     {% if quiz_list %}
-		<table class="table table-bordered table-striped">
+        <div class="col-md-12 col-lg-12">
+				<div class="panel panel-primary">
+					<div class="panel-heading">
+						<h3 class="panel-title m-5 text-center bg-secondary text-white py-1">All available quiz!!</h3>
+						<div class="pull-right">
+							<span class="clickable filter" data-toggle="tooltip" title="Toggle table filter" data-container="body">
+								<i class="glyphicon glyphicon-filter"></i>
+							</span>
+						</div>
+					</div>
+					<div class="">
+						<input type="text" class="form-control" id="dev-table-filter" data-action="filter" data-filters="#dev-table" placeholder="Filter by Name" />
+					</div>
+					<table class="table" id="dev-table" style="">
+						<thead class="bg-secondary text-white">
+							<tr>
+                                  <th class="fontMid">{% trans "Title" %}</th>
+                      			  <th class="fontMid">{% trans "Category" %}</th>
+                      			  <th class="fontMid">{% trans "Exam" %}</th>
+                      			  <th class="fontMid">{% trans "Single attempt" %}</th>
+                      			  <th class="fontMid">Click Here!</th>
+							</tr>
+						</thead>
+						<tbody>
+                            {% for quiz in quiz_list %}
 
-		  <thead>
-			<tr>
-			  <th>{% trans "Title" %}</th>
-			  <th>{% trans "Category" %}</th>
-			  <th>{% trans "Exam" %}</th>
-			  <th>{% trans "Single attempt" %}</th>
-			  <th></th>
-			</tr>
-		  </thead>
+                      			<tr>
+                    			  <td>{{ quiz.title }}</td>
+                    			  <td>{{ quiz.category }}</td>
+                    			  <td>{{ quiz.exam_paper }}</td>
+                    			  <td>{{ quiz.single_attempt }}</td>
+                    			  <td>
+                    				<a class="btn bg-secondary text-white" href="{% url 'quiz_start_page' slug=quiz.url %}">
+                    				  {% trans "View details" %}
+                    				</a>
+                    			</tr>
 
-		  <tbody>
-
-        {% for quiz in quiz_list %}
-
-  			<tr>
-			  <td>{{ quiz.title }}</td>
-			  <td>{{ quiz.category }}</td>
-			  <td>{{ quiz.exam_paper }}</td>
-			  <td>{{ quiz.single_attempt }}</td>
-			  <td>
-				<a href="{% url 'quiz_start_page' slug=quiz.url %}">
-				  {% trans "View details" %}
-				</a>
-			</tr>
-
-        {% endfor %}
-		  </tbody>
-
-		</table>
-
+                            {% endfor %}
+						</tbody>
+					</table>
+				</div>
+			</div>
 	{% else %}
         <p>{% trans "There are no available quizzes" %}.</p>
     {% endif %}
