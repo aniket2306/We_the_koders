@@ -2,9 +2,9 @@
 {% if previous.answers %}
 
   {% if user_was_incorrect %}
-    <div class="alert alert-error">
-  	  <strong>{% trans "You answered the above question incorrectly" %}</strong>
-    </div>
+      <i class="fas fa-times-circle"></i>
+  {% else %}
+      <i class="fas fa-check-circle"></i>
   {% endif %}
 
   <table class="table table-bordered">
