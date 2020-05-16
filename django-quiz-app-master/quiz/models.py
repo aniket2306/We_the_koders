@@ -450,7 +450,7 @@ class Sitting(models.Model):
 
     @property
     def check_if_passed(self):
-        return self.get_percent_correct >= self.quiz.pass_mark
+        return self.get_current_score >= self.quiz.pass_mark
 
     @property
     def result_message(self):

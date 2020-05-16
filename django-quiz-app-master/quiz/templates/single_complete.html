@@ -8,11 +8,13 @@
 
 {% block content %}
 
+<div class="container py-5" style="">
+    {% if user.is_authenticated %}
+      <p class="fontLarge" style="text-align:center;">{% trans "You have already sat this exam and only one sitting is permitted" %}.</p>
+    {% else %}
+      <p class="fontLarge" style="text-align:center;">{% trans "This exam is only accessible to Logged in users, Please login to Continue" %}.</p>
+    {% endif %}
+</div>
 
-{% if user.is_authenticated %}
-  <p>{% trans "You have already sat this exam and only one sitting is permitted" %}.</p>
-{% else %}
-  <p>{% trans "This exam is only accessible to signed in users" %}.</p>
-{% endif %}
 
 {% endblock %}
