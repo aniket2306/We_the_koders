@@ -88,22 +88,23 @@
     </button>
     <div class="collapse navbar-collapse" id="collapsingNavbarXs">
       <ul class="navbar-nav rm-auto">
-          <li class="nav-item py-3 px-0 px-lg-3 rounded text-dark text-uppercase" style="color:gray">
-            <a href="{% url 'quiz_index' %}" class="nav-link">Quizzes</a>
-          </li>
-        {% if user.is_authenticated %}
-
-        <li class="nav-item py-3 px-0 px-lg-3 rounded text-dark text-uppercase" style="color:gray">
-            <a href="{% url 'quiz_progress' %}" class="nav-link">Progress</a>
-          </li>
-        {% endif %}
+         <!-- If you want any Nav option to left of Navbar!! -->
 
       </ul>
       <ul class="navbar-nav ml-auto">
-        <li><a class="nav-link py-3 px-0 px-lg-3 rounded text-uppercase" href="{% url 'aboutus' %}">About Us</a></li>
+          <li>
+            <a class="nav-link py-3 px-0 px-lg-3 rounded text-uppercase" href="{% url 'quiz_index' %}">Quizzes</a>
+          </li>
+        {% if user.is_authenticated %}
+
+        <li>
+            <a class="nav-link py-3 px-0 px-lg-3 rounded text-uppercase" href="{% url 'quiz_progress' %}">Progress</a>
+          </li>
+        {% endif %}
+
         {% if notifications.count > 0 %}
-        <a class="nav-link dropdown-toggle py-3 px-0 px-lg-3 rounded notification text-uppercase" id="userDropdown1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          <span>Notification</span>
+        <a class="nav-link py-3 px-0 px-lg-3 rounded notification text-uppercase" id="userDropdown1" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          <span><img src="https://img.icons8.com/android/24/000000/appointment-reminders.png"/></span>
           <span class="badge"></span>
         </a>
             <div class="dropdown-menu dropdown-menu-right px-4 notif-dropdown" aria-labelledby="userDropdown1">
